@@ -6,9 +6,13 @@
   mat-form-field {
     width: 100%;
   }
+}
+
+.btns-container {
+  display: flex;
+  justify-content: center;
 
   .cancel-field-btn {
     margin-right: 10px;
   }
-
 }

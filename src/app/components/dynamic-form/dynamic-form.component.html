@@ -1,0 +1,67 @@
+
+<mat-card class="form">
+  <div class="header-container">
+    <h2 class="header">{{ title }}</h2>
+
+    <button
+      class="add-field-btn"
+      mat-button
+      color="primary"
+      (click)="openFormFieldDialog()">
+      {{ buttonsTitles.ADD_FIELD }}
+    </button>
+  </div>
+
+  <form *ngIf="form" [formGroup]="form">
+    <div
+      *ngFor="let formField of formFields; let i = index"
+      class="form-field">
+
+      <mat-form-field [ngSwitch]="formField.type" appearance="fill">
+        <mat-label>{{ formField.label }}</mat-label>
+
+        <input
+          *ngSwitchCase="fieldTypes.SINGLE"
+          [formControlName]="formField.name"
+          matInput>
+
+        <textarea
+          *ngSwitchCase="fieldTypes.MULTIPLE"
+          [formControlName]="formField.name"
+          matInput>
+            </textarea>
+
+        <input
+          *ngSwitchCase="fieldTypes.NUMBER"
+          type="number"
+          [formControlName]="formField.name"
+          matInput>
+
+        <ng-container
+          *ngSwitchCase="fieldTypes.DATE">
+          <input [formControlName]="formField.name" matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </ng-container>
+      </mat-form-field>
+
+      <button
+        class="delete-field-btn"
+        mat-button
+        color="primary"
+        type="button"
+        (click)="deleteFormField(i, formField.name)">
+          {{ buttonsTitles.DELETE_FIELD }}
+      </button>
+    </div>
+
+    <button
+      class="add-field-btn"
+      mat-raised-button
+      color="primary"
+      [disabled]="form.invalid || !formFields || !formFields.length"
+      (click)="sendResults()">
+        {{ buttonsTitles.SUBMIT }}
+    </button>
+  </form>
+</mat-card>

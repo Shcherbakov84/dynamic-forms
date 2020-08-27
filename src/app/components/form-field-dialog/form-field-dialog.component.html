@@ -1,0 +1,52 @@
+
+<form *ngIf="form" [formGroup]="form">
+  <div class="form-field">
+    <mat-form-field appearance="legacy">
+      <mat-label>{{ fieldLabels.LABEL }}</mat-label>
+      <input [formControlName]="controlsKeys.LABEL" matInput>
+    </mat-form-field>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="legacy">
+      <mat-label>{{ fieldLabels.NAME }}</mat-label>
+      <input [formControlName]="controlsKeys.NAME" matInput>
+    </mat-form-field>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="legacy">
+      <mat-label>{{ fieldLabels.TYPE }}</mat-label>
+      <mat-select [formControlName]="controlsKeys.TYPE">
+        <mat-option *ngFor="let fieldType of fieldTypes" [value]="fieldType.value">
+          {{ fieldType.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-field">
+    <mat-checkbox color="primary" [formControlName]="controlsKeys.REQUIRED">
+      {{ fieldLabels.REQUIRED }}
+    </mat-checkbox>
+  </div>
+
+  <div class="btns-container">
+    <button
+      class="cancel-field-btn"
+      mat-raised-button
+      (click)="closeDialog()">
+        {{ buttonsTitles.CANCEL }}
+    </button>
+
+    <button
+      class="add-field-btn"
+      mat-raised-button
+      color="primary"
+      [disabled]="form.pristine || form.invalid"
+      (click)="saveFormField()">
+        {{ buttonsTitles.SUBMIT }}
+    </button>
+  </div>
+
+</form>

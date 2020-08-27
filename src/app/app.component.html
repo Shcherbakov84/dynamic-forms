@@ -1,0 +1,10 @@
+
+<div class="form-container">
+  <app-dynamic-form (formResults)="storeResults($event)"></app-dynamic-form>
+
+  <mat-card class="form-results">
+    <h2>{{ titles.RESULTS }}</h2>
+
+    <div *ngIf="formResults">{{ formResults | json }}</div>
+  </mat-card>
+</div>
